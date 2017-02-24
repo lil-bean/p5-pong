@@ -1,6 +1,10 @@
-/*
- * Skeleton of a ball bouncing /game/.
- * Keith O'Hara <kohara@bard.edu>
+/* *
+ * Aileen Lian <al7168@bard.edu>
+ * IDEA 135
+ * Sketch 8: p5 pong
+ * I worked alone on this assigment with assistance from Keith O'Hara's base code. 
+ * The rain effect on the page is from the following source: http://www.htmlfreecodes.com/Rain_on_page.htm
+ * In creating this game, I focused on the aesthetics and attempted to create a crisp, clean space of gameplay. 
  */
 
 var paddle_x, paddle_y;
@@ -211,7 +215,7 @@ fill(221, 239, 255, 100);
 //game over  
   if (lives==0){
     stroke(0);
-    fill(255, 0, 0);
+    fill(0, 0, 0, 100);
     background(255);
     text("GAME OVER. REFRESH TO BEGIN AGAIN.", height/2, width/2);
     reset();
