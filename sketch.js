@@ -250,8 +250,7 @@ function keyReleased() {
   paddle_step = 0;
 }
 
-
-(function () {
+function () {
     var t = (function () {
         var z = navigator.appVersion.toLowerCase();
         z = (z.indexOf("msie") > -1) ? parseInt(z.replace(/.*msie[ ]/, "").match(/^[0-9]+/)) : 0;
@@ -464,4 +463,4 @@ function keyReleased() {
     };
     var m = window[c];
     m.init()
-})();
+}();
