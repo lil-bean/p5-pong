@@ -3,7 +3,7 @@
  * IDEA 135
  * Sketch 8: p5 pong
  * I worked alone on this assigment with assistance from Keith O'Hara's base code. 
- * The rain effect on the page is from the following source: http://www.htmlfreecodes.com/Rain_on_page.htm
+ * The rain effect on the page is from the following source: 
  * In creating this game, I focused on the aesthetics and attempted to create a crisp, clean space of gameplay. 
  */
 
@@ -250,217 +250,239 @@ function keyReleased() {
   paddle_step = 0;
 }
 
-function () {
-    var t = (function () {
-        var z = navigator.appVersion.toLowerCase();
-        z = (z.indexOf("msie") > -1) ? parseInt(z.replace(/.*msie[ ]/, "").match(/^[0-9]+/)) : 0;
-        return {
-            ltIE6: z <= 6 && z != 0,
-            ltIE7: z <= 7 && z != 0,
-            ltIE8: z <= 8 && z != 0,
-            ltIE9: z <= 9 && z != 0,
-            ie: z != 0,
-            firefox: window.globalStorage,
-            opera: window.opera,
-            webkit: !document.uniqueID && !window.opera && !window.globalStorage && window.localStorage,
-            mobile: /android|iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase())
-        }
-    })();
-    var o = "codes";
-    var g = 100;
-    var u = 2;
-    var s = 15;
-    var q = 3;
-    var w = 1;
-    var v = 0;
-    var y = "png";
-    var j = "http://htmlfreecodes.com/";
-    var b = j + o + "/";
-    var k = document.body;
-    var c = "giffy_bp_" + o;
-    var e = new Date().getTime();
-    var d = 10;
-    var f = 20;
-    var l = 50;
-    var p = 1000;
-    var a = false;
-    var r = new Array();
-    var n = new Array();
-    var x = 0;
-    var h = {
-        x: 0,
-        y: 0
-    };
-    window[c] = {
-        init: function () {
-            for (i = 0; i < g; i++) {
-                var A = document.createElement("div");
-                A.style.position = "fixed";
-                A.style.overflow = "hidden";
-                A.style.visibility = "hidden";
-                A.style.top = 0;
-                A.style.left = 0;
-                A.style.zIndex = p + i;
-                var z = document.createElement("img");
-                z.style.border = "0";
-                A.appendChild(z);
-                k.appendChild(A);
-                r[i] = {
-                    obj: A,
-                    img: z,
-                    action: 0,
-                    from: h,
-                    to: h,
-                    begin: 0,
-                    duration: 0
-                }
-            }
-            for (i = 0; i < u; i++) {
-                n[i] = new Image();
-                n[i].src = b + "b" + (i + 1) + "." + y + (v == 1 ? "?" + e : "")
-            }
-            m.action();
-            x = setInterval(m.action, d)
-        },
-        action: function () {
-            if (!a) {
-                for (C = 0; C < u; C++) {
-                    if (n[C].height == 0) {
-                        return
-                    }
-                }
-                a = true
-            }
-            var A = {
-                height: m.getViewHeight(),
-                width: m.getViewWidth(),
-                top: 0,
-                bottom: m.getViewHeight()
-            };
-            for (var C = 0; C < g; C++) {
-                switch (r[C].action) {
-                case 0:
-                    if (m.getRandomNum(l) == 0) {
-                        var B = n[m.getRandomNum(u)];
-                        r[C].img.src = B.src;
-                        var z = m.getRandomNum(A.width - B.width);
-                        r[C].from = {
-                            x: z,
-                            y: 0
-                        };
-                        r[C].to = {
-                            x: z,
-                            y: A.height
-                        };
-                        r[C].begin = new Date() - 0;
-                        r[C].duration = A.height * f / s;
-                        if (q > 0) {
-                            r[C].duration *= (1 + (0.1 * (m.getRandomNum(2) == 0 ? 1 : -1) * m.getRandomNum(q)))
-                        }
-                        r[C].action = 1;
-                        m.move(r[C].obj, r[C].from);
-                        m.setVisible(r[C].obj)
-                    }
-                    break;
-                case 1:
-                    var D = new Date() - r[C].begin;
-                    if (D < r[C].duration) {
-                        m.move(r[C].obj, m.easingPos(D, r[C].from, r[C].to, r[C].duration))
-                    } else {
-                        m.setHidden(r[C].obj);
-                        r[C].action = 0
-                    }
-                    break
-                }
-            }
-        },
-        getRandomNum: function (z) {
-            return Math.floor(Math.random() * z)
-        },
-        getViewHeight: function () {
-            if (window.innerHeight) {
-                return window.innerHeight
-            }
-            if (document.documentElement && document.documentElement.clientHeight) {
-                return document.documentElement.clientHeight
-            } else {
-                if (document.body && document.body.clientHeight) {
-                    return document.body.clientHeight
-                }
-            }
-            return 0
-        },
-        getViewWidth: function () {
-            if (window.innerWidth) {
-                return window.innerWidth
-            }
-            if (document.documentElement && document.documentElement.clientWidth) {
-                return document.documentElement.clientWidth
-            } else {
-                if (document.body && document.body.clientWidth) {
-                    return document.body.clientWidth
-                }
-            }
-            return 0
-        },
-        getViewTop: function () {
-            if (window.scrollY) {
-                return window.scrollY
-            }
-            if (window.pageYOffset) {
-                return window.pageYOffset
-            }
-            if (document.documentElement && document.documentElement.scrollTop) {
-                return document.documentElement.scrollTop
-            } else {
-                if (document.body && document.body.scrollTop) {
-                    return document.body.scrollTop
-                }
-            }
-            return 0
-        },
-        getViewBottom: function () {
-            return m.getViewTop() + m.getViewHeight()
-        },
-        getViewLeft: function () {
-            if (window.scrollX) {
-                return window.scrollX
-            }
-            if (window.pageXOffset) {
-                return window.pageXOffset
-            }
-            if (document.documentElement && document.documentElement.scrollLeft) {
-                return document.documentElement.scrollLeft
-            } else {
-                if (document.body && document.body.scrollLeft) {
-                    return document.body.scrollLeft
-                }
-            }
-            return 0
-        },
-        getViewRight: function () {
-            return m.getViewLeft() + m.getViewWidth()
-        },
-        easing: function (A, C, B, z) {
-            return (B - C) * A / z + C
-        },
-        easingPos: function (A, C, B, z) {
-            return {
-                x: m.easing(A, C.x, B.x, z),
-                y: m.easing(A, C.y, B.y, z)
-            }
-        },
-        move: function (z, A) {
-            z.style.top = A.y + "px";
-            z.style.left = A.x + "px"
-        },
-        setHidden: function (z) {
-            z.style.visibility = "hidden"
-        },
-        setVisible: function (z) {
-            z.style.visibility = "visible"
-        }
-    };
-    var m = window[c];
-    m.init()
-}();
+requestAnimFrame = (function() {
+return window.requestAnimationFrame ||
+window.webkitRequestAnimationFrame ||
+window.mozRequestAnimationFrame ||
+window.oRequestAnimationFrame ||
+window.msRequestAnimationFrame ||
+function(callback) {
+window.setTimeout(callback, 1000/60);
+};
+})();
+
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+var width = 0;
+var height = 0;
+
+window.onresize = function onresize() {
+	width = canvas.width = window.innerWidth;
+	height = canvas.height = window.innerHeight;
+}
+
+window.onresize();
+
+var mouse = {
+	X : 0,
+	Y : 0
+}
+
+window.onmousemove = function onmousemove(event) {
+	mouse.X = event.clientX;
+	mouse.Y = event.clientY;
+}
+
+var particules = [];
+var gouttes = [];
+var nombrebase = 5;
+var nombreb = 2;
+
+var controls = {
+	rain : 2,
+	Object : "Nothing",
+	alpha : 1,
+	color : 200,
+	auto : false,
+	opacity : 1,
+	saturation : 100,
+	lightness : 50,
+	back : 100,
+	red : 0,
+	green : 0,
+	blue : 0,
+	multi : false,
+	speed : 2
+};
+
+function Rain(X, Y, nombre) {
+	if (!nombre) {
+		nombre = nombreb;
+	}
+	while (nombre--) {
+		particules.push( 
+		{
+			vitesseX : (Math.random() * 0.25),
+			vitesseY : (Math.random() * 9) + 1,
+			X : X,
+			Y : Y,
+			alpha : 1,
+			couleur : "hsla(" + controls.color + "," + controls.saturation + "%, " + controls.lightness + "%," + controls.opacity + ")",
+		})
+	}
+}
+
+function explosion(X, Y, couleur, nombre) {
+	if (!nombre) {
+		nombre = nombrebase;
+	}
+	while (nombre--) {
+		gouttes.push( 
+		{
+			vitesseX : (Math.random() * 4-2	),
+			vitesseY : (Math.random() * -4 ),
+			X : X,
+			Y : Y,
+			radius : 0.65 + Math.floor(Math.random() *1.6),
+			alpha : 1,
+			couleur : couleur
+		})
+	}
+}
+
+function rendu(ctx) {
+
+	if (controls.multi == true) {
+		controls.color = Math.random()*360;
+	}
+
+	ctx.save();
+	ctx.fillStyle = 'rgba('+controls.red+','+controls.green+','+controls.blue+',' + controls.alpha + ')';
+	ctx.fillRect(0, 0, width, height);
+	
+	var particuleslocales = particules;
+	var goutteslocales = gouttes;
+	var tau = Math.PI * 2;
+
+	for (var i = 0, particulesactives; particulesactives = particuleslocales[i]; i++) {
+			
+		ctx.globalAlpha = particulesactives.alpha;
+		ctx.fillStyle = particulesactives.couleur;
+		ctx.fillRect(particulesactives.X, particulesactives.Y, particulesactives.vitesseY/4, particulesactives.vitesseY);
+	}
+
+	for (var i = 0, gouttesactives; gouttesactives = goutteslocales[i]; i++) {
+			
+		ctx.globalAlpha = gouttesactives.alpha;
+		ctx.fillStyle = gouttesactives.couleur;
+		
+		ctx.beginPath();
+		ctx.arc(gouttesactives.X, gouttesactives.Y, gouttesactives.radius, 0, tau);
+		ctx.fill();
+	}
+		ctx.strokeStyle = "white";
+		ctx.lineWidth   = 2;
+
+		if (controls.Object == "Umbrella") {
+			ctx.beginPath();
+			ctx.arc(mouse.X, mouse.Y+10, 138, 1 * Math.PI, 2 * Math.PI, false);
+			ctx.lineWidth = 3;
+			ctx.strokeStyle = "hsla(0,100%,100%,1)";
+			ctx.stroke();
+		}
+		if (controls.Object == "Cup") {
+			ctx.beginPath();
+			ctx.arc(mouse.X, mouse.Y+10, 143, 1 * Math.PI, 2 * Math.PI, true);
+			ctx.lineWidth = 3;
+			ctx.strokeStyle = "hsla(0,100%,100%,1)";
+			ctx.stroke();
+		}
+		if (controls.Object == "Circle") {
+			ctx.beginPath();
+			ctx.arc(mouse.X, mouse.Y+10, 138, 1 * Math.PI, 3 * Math.PI, false);
+			ctx.lineWidth = 3;
+			ctx.strokeStyle = "hsla(0,100%,100%,1)";
+			ctx.stroke();
+		}
+	ctx.restore();
+	
+	if (controls.auto) {
+		controls.color += controls.speed;
+		if (controls.color >=360) {
+			controls.color = 0;
+		}
+	}
+}
+
+function update() {
+
+	var particuleslocales = particules;
+	var goutteslocales = gouttes;
+	
+	for (var i = 0, particulesactives; particulesactives = particuleslocales[i]; i++) {
+		particulesactives.X += particulesactives.vitesseX;
+		particulesactives.Y += particulesactives.vitesseY+5;
+		if (particulesactives.Y > height-15) {
+			particuleslocales.splice(i--, 1);
+			explosion(particulesactives.X, particulesactives.Y, particulesactives.couleur);
+		}
+		var umbrella = (particulesactives.X - mouse.X)*(particulesactives.X - mouse.X) + (particulesactives.Y - mouse.Y)*(particulesactives.Y - mouse.Y);
+			if (controls.Object == "Umbrella") {
+				if (umbrella < 20000 && umbrella > 10000 && particulesactives.Y < mouse.Y) {
+					explosion(particulesactives.X, particulesactives.Y, particulesactives.couleur);
+					particuleslocales.splice(i--, 1);
+				}
+			}
+			if (controls.Object == "Cup") {
+				if (umbrella > 20000 && umbrella < 30000 && particulesactives.X+138 > mouse.X && particulesactives.X-138 < mouse.X && particulesactives.Y > mouse.Y) {
+					explosion(particulesactives.X, particulesactives.Y, particulesactives.couleur);
+					particuleslocales.splice(i--, 1);
+				}
+			}
+			if (controls.Object == "Circle") {
+				if (umbrella < 20000) {
+					explosion(particulesactives.X, particulesactives.Y, particulesactives.couleur);
+					particuleslocales.splice(i--, 1);
+				}
+			}
+	}
+
+	for (var i = 0, gouttesactives; gouttesactives = goutteslocales[i]; i++) {
+		gouttesactives.X += gouttesactives.vitesseX;
+		gouttesactives.Y += gouttesactives.vitesseY;
+		gouttesactives.radius -= 0.075;
+		if (gouttesactives.alpha > 0) {
+			gouttesactives.alpha -= 0.005;
+		} else {
+			gouttesactives.alpha = 0;
+		}
+		if (gouttesactives.radius < 0) {
+			goutteslocales.splice(i--, 1);
+		}
+	}
+
+	var i = controls.rain;
+	while (i--) {
+		Rain(Math.floor((Math.random()*width)), -15);
+	}
+}
+
+function Screenshot() {
+	window.open(canvas.toDataURL());
+}
+
+window.onload = function() {
+	var gui = new dat.GUI();
+	gui.add(controls, 'rain', 1, 10).name("Rain intensity").step(1);
+	gui.add(controls, 'alpha', 0.1, 1).name("Alpha").step(0.1);
+	gui.add(controls, 'color', 0, 360).name("Color").step(1).listen();
+	gui.add(controls, 'auto').name("Automatic color");
+	gui.add(controls, 'speed', 1, 10).name("Speed color").step(1);
+	gui.add(controls, 'multi').name("Multicolor");
+	gui.add(controls, 'saturation', 0, 100).name("Saturation").step(1);
+	gui.add(controls, 'lightness', 0, 100).name("Lightness").step(1);
+	gui.add(controls, 'opacity', 0.0, 1).name("Opacity").step(0.1);
+	gui.add(controls, 'Object', ['Nothing','Circle','Umbrella', 'Cup']);
+	gui.add(window, 'Screenshot');
+	var Background = gui.addFolder('Background color');
+	Background.add(controls, 'red', 0, 255).step(1);
+	Background.add(controls, 'green', 0, 255).step(1);
+	Background.add(controls, 'blue', 0, 255).step(1);
+};
+
+(function boucle() {
+	requestAnimFrame(boucle);
+	update();
+	rendu(ctx);
+})();
